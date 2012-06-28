@@ -41,12 +41,12 @@ source $ZSH/oh-my-zsh.sh
 # ----------------------------------------------------------------------
 # OSX only
 # ----------------------------------------------------------------------
-if [ $(uname -s) = Darwin ]; then
+if [[ $(uname -s) = Darwin ]]; then
 
 	# Source git autocompletion file on OSX (macport)
-	if [ -f /opt/local/share/doc/git-core/contrib/completion/git-completion.bash ]; then
-		source /opt/local/share/doc/git-core/contrib/completion/git-completion.bash
-	fi
+	#if [ -f /opt/local/share/doc/git-core/contrib/completion/git-completion.bash ]; then
+	#	source /opt/local/share/doc/git-core/contrib/completion/git-completion.bash
+	#fi
 
 	# Macports
 	export PATH=/opt/local/bin:/opt/local/sbin:$PATH

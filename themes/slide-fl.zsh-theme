@@ -70,28 +70,30 @@ fi
 # SHOW IF CONNECTED THROUGH VPN
 ################################################################################
 VPN=""
-# Only parse if there is a tunnel interface
-if [ -n "$(grep tun0 /proc/net/dev)" ]; then
-    ifaces=$(route -n | awk {'print $8'})
-    lineroute=$(route -n | sed -ne '3p')
-    if [ "$(echo $lineroute | awk {'print $1'})" = "0.0.0.0" ]; then
-        if [ "$(echo $lineroute | awk {'print $8'})" = "tun0" ]; then
-            VPN="%{%B%F{red}%}⬊⚑"
-            promptsize=$((promptsize+2))
-            a=$(($a+1))
-        else
-            for i in $(echo $ifaces)
-            do
-                if [ "$i" = "tun0" ]; then
-                    VPN="%{%B%F{green}%}⚑⬈"
-                    promptsize=$((promptsize+2))
-                    break
-                fi
-            done
-        fi
-    fi
-fi
 
+# Only parse if there is a tunnel interface
+if [[ -a /proc/net/dev ]] ; then
+	if [ -n "$(grep tun0 /proc/net/dev)" ]; then
+		ifaces=$(route -n | awk {'print $8'})
+		lineroute=$(route -n | sed -ne '3p')
+		if [ "$(echo $lineroute | awk {'print $1'})" = "0.0.0.0" ]; then
+			if [ "$(echo $lineroute | awk {'print $8'})" = "tun0" ]; then
+				VPN="%{%B%F{red}%}⬊⚑"
+				promptsize=$((promptsize+2))
+				a=$(($a+1))
+			else
+				for i in $(echo $ifaces)
+				do
+					if [ "$i" = "tun0" ]; then
+						VPN="%{%B%F{green}%}⚑⬈"
+						promptsize=$((promptsize+2))
+						break
+					fi
+				done
+			fi
+		fi
+	fi
+fi
 ################################################################################
 # SET THE LENGTH OF THE FILL BAR
 ################################################################################
