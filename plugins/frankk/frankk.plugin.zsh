@@ -12,7 +12,7 @@ alias te='tail -f /var/log/apache2/error.log'
 alias h='cat /etc/hosts'
 alias eh='sudo vi /etc/hosts'
 alias m='mount | column -t'
-
+alias .zshrc='source ~/.zshrc'
 
 # ----------------------------------------------------------------------
 # MISC FUNCTIONS
